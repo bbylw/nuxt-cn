@@ -55,4 +55,4 @@ export function useState<T> (key: string, init?: () => T | Ref<T>): Ref<T>
 
 如果你想用 `useState` 存储 Nuxt 不支持的类实例，可以使用 [`definePayloadPlugin`](/docs/api/composables/use-nuxt-app#自定义-reducerreviver) 为你的类添加自定义的序列化器与反序列化器。
 
-:read-more{to="/docs/api/composables/use-nuxt-app#payload}
+:read-more{to="/docs/api/composables/use-nuxt-app#payload"}

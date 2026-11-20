@@ -1,4 +1,6 @@
 import { Fragment, type ReactNode } from 'react'
+import fs from 'node:fs'
+import path from 'node:path'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import Link from 'next/link'
 import { unified } from 'unified'
@@ -170,7 +172,10 @@ const components = {
   ),
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
     let src = props.src ?? ''
-    if (typeof src === 'string' && src.startsWith('/')) src = `https://nuxt.com${src}`
+    if (typeof src === 'string' && src.startsWith('/')) {
+      // 本地 public/ 中存在的资源（如 CLI 终端截图）直接用本站路径，其余指向 nuxt.com
+      src = fs.existsSync(path.join(process.cwd(), 'public', src)) ? src : `https://nuxt.com${src}`
+    }
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
     return <img {...props} src={src} loading="lazy" className="rounded-lg border border-fd-border" />
   },

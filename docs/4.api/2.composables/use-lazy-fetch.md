@@ -82,7 +82,7 @@ export function useLazyFetch<ResT, ErrorT = NuxtError<unknown>, DataT = ResT> (
 | `pending` | `Ref<boolean>` | 请求进行中为 `true`。参见 [`useFetch`](/docs/api/composables/use-fetch#返回值)。 |
 | `clear` | `() => void` | 将 `data` 重置为 `undefined`，`error` 重置为 `undefined`，将 `status` 设为 `idle`，并取消任何挂起的请求。 |
 
-:read-more{to="/docs/api/composables/use-fetch#返回值}
+:read-more{to="/docs/api/composables/use-fetch#返回值"}
 
 ## 示例
 
