@@ -7,6 +7,14 @@
   --color-fd-ring: hsl(158 64% 42%);
 }
 
+/* fumadocs 的样式未分层（unlayered），会覆盖 @theme 中的同名变量，
+   因此品牌色必须用未分层的 :root/.dark 规则在其后声明才能生效 */
+:root {
+  --color-fd-primary: hsl(158 64% 42%);
+  --color-fd-primary-foreground: hsl(0 0% 100%);
+  --color-fd-ring: hsl(158 64% 42%);
+}
+
 .dark {
   --color-fd-primary: hsl(158 64% 52%);
   --color-fd-primary-foreground: hsl(158 80% 6%);
@@ -33,4 +41,69 @@ code,
 pre,
 kbd {
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* ---------- 落地页 ---------- */
+
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgb(0 220 130 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(0 220 130 / 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 25%, transparent 75%);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+.fade-up-delay {
+  animation: fade-up 0.7s ease-out 0.2s both;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee 36s linear infinite;
+}
+
+.marquee-reverse {
+  animation-direction: reverse;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee,
+  .fade-up,
+  .fade-up-delay {
+    animation: none;
+  }
+}
+
+/* shiki 双主题：默认浅色，.dark 下切换到 --shiki-dark 变量 */
+.dark .landing-code .shiki,
+.dark .landing-code .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: transparent !important;
 }
