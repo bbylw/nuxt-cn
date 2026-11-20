@@ -8,9 +8,9 @@ links:
     size: xs
 ---
 
-:note
+::note
 使用深层赋值来更新 [`app.config`](/docs/directory-structure/app/app-config)。已有的（嵌套）属性会被保留。
-:
+::
 
 ## 用法
 

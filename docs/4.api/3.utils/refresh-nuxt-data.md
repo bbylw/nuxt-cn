@@ -10,9 +10,9 @@ links:
 
 `refreshNuxtData` 用于重新获取所有或特定的 `asyncData` 实例，包括来自 [`useAsyncData`](/docs/api/composables/use-async-data)、[`useLazyAsyncData`](/docs/api/composables/use-lazy-async-data)、[`useFetch`](/docs/api/composables/use-fetch) 和 [`useLazyFetch`](/docs/api/composables/use-lazy-fetch) 的实例。
 
-:note
+::note
 如果你的组件被 `<KeepAlive>` 缓存并进入了停用状态，组件内的 `asyncData` 仍然会被重新获取，直到该组件被卸载。
-:
+::
 
 ## 类型
 
@@ -89,8 +89,8 @@ async function refresh () {
 </template>
 ```
 
-:note
+::note
 如果你能访问到 `asyncData` 实例，推荐使用它的 `refresh` 或 `execute` 方法作为重新获取数据的方式。
-:
+::
 
 :read-more{to="/docs/getting-started/data-fetching"}

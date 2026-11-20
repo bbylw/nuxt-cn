@@ -12,9 +12,9 @@ Nuxt 提供了组合式函数和工具，以提供一流的服务器端渲染支
 
 `setResponseStatus` 设置响应的状态码（以及可选的 statusText）。
 
-:important
+::important
 `setResponseStatus` 只能在 [Nuxt 上下文](/docs/guide/going-further/nuxt-app#the-nuxt-context) 中调用。
-:
+::
 
 ```ts
 const event = useRequestEvent()
@@ -29,8 +29,8 @@ if (event) {
 }
 ```
 
-:note
+::note
 在浏览器中，`setResponseStatus` 没有任何效果。
-:
+::
 
 :read-more{to="/docs/getting-started/error-handling"}

@@ -1,6 +1,6 @@
 ---
 navigation.title: 'Nuxt 性能'
-title: Nuxt performance
+title: 'Nuxt 性能'
 description: 提升 Nuxt 应用性能的最佳实践。
 ---
 
@@ -42,7 +42,35 @@ export default defineNuxtConfig({
 })
 ```
 
-::read-more{title="NuxtLink" to="/docs/api/components/nuxt-link"}
+:read-more{title="NuxtLink" to="/docs/api/components/nuxt-link"}
+
+### 资源提示（Resource Hints）
+
+为了加速客户端导航，Nuxt 会为某个请求所解析出的 JavaScript 和 CSS 分块（chunk）添加资源提示。`<link rel="preload">`（或 `modulepreload`）标记页面本身需要的分块，而 `<link rel="prefetch">` 标记入口文件与已渲染组件懒加载导入的分块，这样当用户之后导航到它们时这些资源已经完成预热。
+
+预加载提示在 HTML 被解析后立即生效。预取提示渲染在一个 `<template>` 元素内部，因此浏览器会忽略它们，直到应用准备就绪后 Nuxt 才将其激活（参见 [`onNuxtReady`](/docs/api/utils/on-nuxt-ready)）。它们也不会被包含进 `Link` 响应头和 103 Early Hints 中。这样一来，在页面加载时它们就不会与页面自身的资源争抢带宽。你可以通过 [`experimental.deferPrefetchHints`](/docs/guide/going-further/experimental-features#deferprefetchhints) 关闭这一行为。在开启了流量节省（data saver）的连接上，或者在 2G 连接上，它们根本不会被激活。使用 [`noScripts`](/docs/guide/going-further/features#noscripts) 服务的路由没有客户端去激活它们，因此其非脚本类的预取提示不会被延迟。
+
+在一个大型应用中，被预取的集合可能增长到超出页面实际所需的范围。公开页面和登录后的应用往往共享同一个入口分块，因此预渲染的公开页面可能会去预取只有登录后应用才使用的分块，把带宽花在了访客永远不会加载的分块上。
+
+要阻止某个分块被预取，可以在 [`build:manifest`](/docs/api/advanced/hooks#nuxt-hooks-build-time) 钩子中把该分块 manifest 条目的 `prefetch` 设为 `false`：
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  hooks: {
+    'build:manifest': (manifest) => {
+      for (const chunk of Object.values(manifest)) {
+        if (chunk.src?.startsWith('pages/app/')) {
+          chunk.prefetch = false
+        }
+      }
+    },
+  },
+})
+```
+
+这会为所有源文件位于 `pages/app/` 之下的分块移除 `rel="prefetch"` 提示，同时把分块保留在包中，并让 `preload` 和 `modulepreload` 提示保持不变。请调整 `startsWith` 前缀，指向你的公开页面不应该预取其分块的目录。
+
+你也可以在自己的代码中使用 [`preloadComponents`](/docs/api/utils/preload-components)、[`preloadRouteComponents`](/docs/api/utils/preload-route-components) 和 [`prefetchComponents`](/docs/api/utils/prefetch-components) 来预加载特定的组件或路由。
 
 ### 混合渲染
 
@@ -71,7 +99,7 @@ export default defineNuxtConfig({
 
 Nuxt 服务器会自动注册相应的中间件，并使用 Nitro 缓存层将路由包裹在缓存处理器中。
 
-::read-more{title="混合渲染" to="/docs/guide/concepts/rendering#hybrid-rendering"}
+:read-more{title="混合渲染" to="/docs/guide/concepts/rendering#hybrid-rendering"}
 
 ### 懒加载组件
 
@@ -93,7 +121,7 @@ const show = ref(false)
 
 通过使用 `Lazy` 前缀，你可以将组件代码的加载推迟到合适的时机，这有助于优化你的 JavaScript 包体积。
 
-::read-more{title="懒加载组件" to="/docs/directory-structure/app/components#dynamic-imports"}
+:read-more{title="懒加载组件" to="/docs/directory-structure/app/components#dynamic-imports"}
 
 ### 延迟水合
 
@@ -109,13 +137,17 @@ const show = ref(false)
 
 为了优化你的应用，你可能希望将某些组件的水合推迟到它们可见时，或者推迟到浏览器完成更重要的任务之后。
 
-::read-more{title="延迟水合" to="/docs/directory-structure/app/components#delayed-or-lazy-hydration"}
+:read-more{title="延迟水合" to="/docs/directory-structure/app/components#delayed-or-lazy-hydration"}
+
+对于几乎不需要或完全不需要客户端交互的内容型网站和营销网站，你可以更进一步：结合预渲染、`noScripts` 路由规则、[服务端组件](/docs/guide/concepts/server-components) 以及延迟水合，交付接近零 JavaScript 的页面。
+
+:read-more{title="近乎静态的网站" to="/docs/guide/recipes/mostly-static-sites"}
 
 ### 获取数据
 
 为了避免重复获取同一份数据（一次在服务端、一次在客户端），Nuxt 提供了 [`useFetch`](/docs/api/composables/use-fetch) 和 [`useAsyncData`](/docs/api/composables/use-async-data)。它们确保如果 API 调用在服务端发起，数据会通过 payload 转发给客户端，而不是再次获取。
 
-::read-more{title="数据获取" to="/docs/getting-started/data-fetching"}
+:read-more{title="数据获取" to="/docs/getting-started/data-fetching"}
 
 ## Nuxt 核心模块
 
@@ -127,7 +159,7 @@ const show = ref(false)
 
 在 Nuxt 中，我们可以使用 [Nuxt Image](https://image.nuxt.com/) 模块，它是为 Nuxt 应用提供的即插即用图片优化方案。它允许使用内置优化器或你喜欢的图片 CDN 来调整大小并转换你的图片。
 
-::video-accordion{title="观看 LearnVue 关于 Nuxt Image 的视频" videoId="_UBff2eqGY0"}
+:video-accordion{title="观看 LearnVue 关于 Nuxt Image 的视频" videoId="_UBff2eqGY0"}
 
 [`<NuxtImg>`](/docs/api/components/nuxt-img) 是原生 `<img>` 标签的即插即用替代品，带来以下增强：
 
@@ -163,7 +195,7 @@ const show = ref(false)
 </template>
 ```
 
-::read-more{title="Nuxt Image" to="https://image.nuxt.com/usage/nuxt-img"}
+:read-more{title="Nuxt Image" to="https://image.nuxt.com/usage/nuxt-img"}
 
 ### 字体
 
@@ -171,7 +203,7 @@ const show = ref(false)
 
 它包括对任何字体文件的内置自动自托管，这意味着你可以以最优方式加载 Web 字体，并借助底层包 [fontaine](https://github.com/unjs/fontaine) 减少布局偏移。
 
-::video-accordion{title="观看 Daniel Roe 关于 Nuxt Fonts 背后理念的演讲" videoId="D3F683UViBY"}
+:video-accordion{title="观看 Daniel Roe 关于 Nuxt Fonts 背后理念的演讲" videoId="D3F683UViBY"}
 
 Nuxt Fonts 会处理你所有的 CSS，并在遇到 font-family 声明时自动完成以下事情：
 
@@ -189,7 +221,7 @@ Nuxt Fonts 会处理你所有的 CSS，并在遇到 font-family 声明时自动�
 
 [Nuxt Scripts](https://scripts.nuxt.com/) 让你以更好的性能、隐私、安全性和开发体验来加载第三方脚本。
 
-::video-accordion{title="观看 Alex Lichter 关于 Nuxt Scripts 的视频" videoId="sjMqUUvH9AE"}
+:video-accordion{title="观看 Alex Lichter 关于 Nuxt Scripts 的视频" videoId="sjMqUUvH9AE"}
 
 Nuxt Scripts 在第三方脚本之上提供了一个抽象层，提供 SSR 支持和类型安全，同时仍让你完全底层控制脚本的加载方式。
 
@@ -210,7 +242,7 @@ onLoaded((gtag) => {
 })
 ```
 
-::read-more{title="Nuxt Scripts" to="https://scripts.nuxt.com/scripts"}
+:read-more{title="Nuxt Scripts" to="https://scripts.nuxt.com/scripts"}
 
 ## 性能分析工具
 
@@ -226,7 +258,7 @@ onLoaded((gtag) => {
 
 ### Nuxt DevTools
 
-[Nuxt DevTools](https://devtools.nuxt.com/) 让你洞察并透明了解你的 Nuxt 应用，以识别性能差距并无缝管理应用配置。
+[Nuxt DevTools](https://nuxt.com/modules/devtools) 让你洞察并透明了解你的 Nuxt 应用，以识别性能差距并无缝管理应用配置。
 
 ![Nuxt DevTools 示例](https://user-images.githubusercontent.com/11247099/217670806-fb39aeff-3881-44e5-b9c8-6c757f5925fc.png)
 

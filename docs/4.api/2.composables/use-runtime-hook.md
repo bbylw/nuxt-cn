@@ -9,9 +9,9 @@ links:
     size: xs
 ---
 
-:important
+::important
 该组合式函数在 Nuxt v3.14+ 中可用。
-:
+::
 
 ```ts [Signature]
 function useRuntimeHook<THookName extends keyof RuntimeNuxtHooks> (

@@ -16,9 +16,9 @@ links:
 const authorization = useRequestHeader('authorization')
 ```
 
-:tip
+::tip
 在浏览器中，`useRequestHeader` 会返回 `undefined`。
-:
+::
 
 ## 示例
 

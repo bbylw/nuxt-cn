@@ -9,15 +9,15 @@ links:
     size: xs
 ---
 
-:important
+::important
 该组合式函数在 Nuxt v3.12+ 中可用。
-:
+::
 
 `onPrehydrate` 是一个组合式生命周期钩子，允许你在 Nuxt 对页面进行 hydration 之前的客户端立即运行回调。
 
-:note
+::note
 这是一个高级工具，应当谨慎使用。例如，[`nuxt-time`](https://github.com/danielroe/nuxt-time/pull/251) 和 [`@nuxtjs/color-mode`](https://github.com/nuxt-modules/color-mode/blob/main/src/script.js) 会操作 DOM 以避免 hydration 不匹配。
-:
+::
 
 ## 用法
 
@@ -26,21 +26,19 @@ links:
 ## 类型
 
 ```ts [Signature]
-export function onPrehydrate (callback: (el: HTMLElement) => void): void
-export function onPrehydrate (callback: string | ((el: HTMLElement) => void), key?: string): undefined | string
+export function onPrehydrate (callback: (el: HTMLElement) => void): string | undefined
 ```
 
 ## 参数
 
 | 参数 | 类型 | 必填 | 描述 |
 | ---- | --- | --- | --- |
-| `callback` | `((el: HTMLElement) => void) \| string` | 是 | 在 Nuxt hydration 之前运行的函数（或字符串化函数）。它会被字符串化并内联到 HTML 中。不应有外部依赖或引用回调之外的变量。在 Nuxt 运行时初始化之前运行，因此不应依赖 Nuxt 或 Vue 上下文。 |
-| `key` | `string` | 否 | （高级）用于标识预 hydration 脚本的唯一 key，对多个根节点等高级场景很有用。 |
+| `callback` | `(el: HTMLElement) => void` | 是 | 在 Nuxt hydration 之前运行的函数。它会被字符串化并内联到 HTML 中。不应有外部依赖或引用回调之外的变量。在 Nuxt 运行时初始化之前运行，因此不应依赖 Nuxt 或 Vue 上下文。 |
 
 ## 返回值
 
-- 仅传入 callback 函数时返回 `undefined`。
-- 传入 callback 和 key 时返回一个字符串（预 hydration id），可用于为高级用例设置或访问 `data-prehydrate-id` 属性。
+- 当回调不接受 `el` 参数时返回 `undefined`。
+- 当回调接受 `el` 参数时返回一个字符串（预 hydration id），可用于为高级用例设置或访问 `data-prehydrate-id` 属性。
 
 ## 示例
 

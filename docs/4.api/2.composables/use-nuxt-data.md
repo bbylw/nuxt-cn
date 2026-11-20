@@ -9,9 +9,9 @@ links:
     size: xs
 ---
 
-:note
+::note
 `useNuxtData` 让你访问 [`useAsyncData`](/docs/api/composables/use-async-data)、[`useLazyAsyncData`](/docs/api/composables/use-lazy-async-data)、[`useFetch`](/docs/api/composables/use-fetch) 以及 [`useLazyFetch`](/docs/api/composables/use-lazy-fetch) 在显式提供 key 时的当前缓存值。
-:
+::
 
 ## 用法
 

@@ -8,9 +8,9 @@ links:
     size: xs
 ---
 
-:read-more{to="/docs/guide/going-further/experimental-features#inlinerouterules" icon="i-lucide-star"}
+::read-more{to="/docs/guide/going-further/experimental-features#inlinerouterules" icon="i-lucide-star"}
 该特性是实验性的，要使用它你必须在你的 `nuxt.config` 中启用 `experimental.inlineRouteRules` 选项。
-:
+::
 
 ## 用法
 
@@ -36,9 +36,9 @@ export default defineNuxtConfig({
 })
 ```
 
-:note
+::note
 当运行 [`nuxt build`](/docs/api/commands/build) 时，首页会被预渲染到 `.output/public/index.html` 中并作为静态资源提供。
-:
+::
 
 ## 注意事项
 
@@ -50,6 +50,6 @@ export default defineNuxtConfig({
 
 如果需要更精细的控制，例如你正在使用页面 [`definePageMeta`](/docs/api/utils/define-page-meta) 中设置的自定义 `path` 或 `alias`，你应该在 `nuxt.config` 中直接设置 `routeRules`。
 
-:read-more{to="/docs/guide/concepts/rendering#hybrid-rendering" icon="i-lucide-medal"}
+::read-more{to="/docs/guide/concepts/rendering#hybrid-rendering" icon="i-lucide-medal"}
 阅读更多关于 `routeRules` 的内容。
-:
+::

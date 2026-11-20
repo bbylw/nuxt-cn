@@ -1,0 +1,36 @@
+import { DocsLayout } from 'fumadocs-ui/layouts/docs'
+import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared'
+import { pageTree } from '@/lib/source'
+
+const baseOptions: BaseLayoutProps = {
+  nav: {
+    title: (
+      <span className="flex items-center gap-2 font-bold">
+        <svg viewBox="0 0 512 512" className="size-5" aria-hidden>
+          <path
+            d="M281.44 397.667h156.88c5.006 0 9.798-1.759 14.133-4.24a28.683 28.683 0 0 0 10.6-10.6c2.481-4.335 4.24-9.127 4.24-14.133 0-5.007-1.759-9.798-4.24-14.134l-105.6-182.4c-2.481-4.334-6.266-8.119-10.6-10.6-4.335-2.481-9.127-4.24-14.133-4.24-5.007 0-9.798 1.759-14.134 4.24-4.334 2.481-8.119 6.266-10.6 10.6l-26.546 45.934-53.067-91.52c-2.481-4.335-6.266-8.12-10.6-10.6-4.335-2.481-9.127-4.24-14.133-4.24-5.007 0-9.798 1.759-14.134 4.24-4.334 2.48-8.119 6.265-10.6 10.6L44.24 354.56c-2.481 4.336-4.24 9.127-4.24 14.134 0 5.006 1.759 9.798 4.24 14.133a28.683 28.683 0 0 0 10.6 10.6c4.335 2.481 9.127 4.24 14.133 4.24h98.56c39.027 0 67.6-17.133 87.467-50.133l48.08-83.067 25.6-44.267 77.12 133.12H302.4l-20.96 44.347Zm-115.84-44.347H96l103.68-179.2 51.68 89.6-34.24 59.067c-13.187 21.467-28.24 30.533-51.52 30.533Z"
+            fill="#00DC82"
+          />
+        </svg>
+        Nuxt 中文文档
+      </span>
+    ),
+    url: '/',
+  },
+  githubUrl: 'https://github.com/bbylw/nuxt-cn',
+  links: [
+    {
+      text: 'Nuxt 官网',
+      url: 'https://nuxt.com',
+      external: true,
+    },
+  ],
+}
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <DocsLayout tree={pageTree} {...baseOptions} sidebar={{ defaultOpenLevel: 1 }}>
+      {children}
+    </DocsLayout>
+  )
+}

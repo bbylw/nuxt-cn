@@ -18,9 +18,9 @@ const headers = useRequestHeaders()
 const { cookie } = useRequestHeaders(['cookie'])
 ```
 
-:tip
+::tip
 在浏览器中，`useRequestHeaders` 会返回一个空对象。
-:
+::
 
 ## 示例
 

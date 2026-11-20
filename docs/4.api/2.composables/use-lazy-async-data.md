@@ -10,9 +10,9 @@ links:
 
 `useLazyAsyncData` 提供了对 [`useAsyncData`](/docs/api/composables/use-async-data) 的封装，通过将 `lazy` 选项设为 `true`，在 handler 解析之前就触发导航。
 
-:note
+::note
 默认情况下，[`useAsyncData`](/docs/api/composables/use-async-data) 会阻塞导航直到其异步 handler 解析完成。`useLazyAsyncData` 允许在后台继续获取数据时立即发生导航。
-:
+::
 
 ## 用法
 
@@ -38,9 +38,9 @@ const { status, data: posts } = await useLazyAsyncData('posts', () => $fetch('/a
 
 `useLazyAsyncData` 在获取数据时让导航继续进行。在使用结果之前，请先在组件模板中检查 `status === 'pending'` 和 `status === 'error'`。
 
-:warning
+::warning
 `useLazyAsyncData` 是编译器转换的保留函数名，因此你不应该把自己的函数命名为 `useLazyAsyncData`。
-:
+::
 
 ## 类型
 

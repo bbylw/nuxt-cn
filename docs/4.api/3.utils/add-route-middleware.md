@@ -8,15 +8,15 @@ links:
     size: xs
 ---
 
-:note
+::note
 路由中间件是存储在 Nuxt 应用的 [`app/middleware/`](/docs/directory-structure/app/middleware) 目录中的导航守卫（除非[另有设置](/docs/api/nuxt-config#middleware)）。
-:
+::
 
 ## 类型
 
 ```ts [Signature]
-function addRouteMiddleware (name: string, middleware: RouteMiddleware, options?: AddRouteMiddlewareOptions): void
-function addRouteMiddleware (middleware: RouteMiddleware): void
+function addRouteMiddleware (name: string, middleware: RouteMiddleware, options?: AddRouteMiddlewareOptions): () => void
+function addRouteMiddleware (middleware: RouteMiddleware): () => void
 
 interface AddRouteMiddlewareOptions {
   global?: boolean
@@ -44,6 +44,35 @@ interface AddRouteMiddlewareOptions {
 - **类型：** `AddRouteMiddlewareOptions`
 
 一个可选的 `options` 参数让你可以将 `global` 设为 `true`，以指示该路由中间件是否是全局的（默认设为 `false`）。
+
+## 返回值
+
+`addRouteMiddleware()` 返回一个函数，用于再次移除该中间件。这对于只在应用部分生命周期内生效的中间件很有用：
+
+```ts [app/plugins/onboarding.ts]
+export default defineNuxtPlugin(() => {
+  const onboarded = useCookie<boolean>('onboarded')
+  if (onboarded.value) {
+    return
+  }
+
+  const unregister = addRouteMiddleware((to) => {
+    if (to.path !== '/onboarding') {
+      return navigateTo('/onboarding')
+    }
+  })
+
+  watch(onboarded, (value) => {
+    if (value) {
+      unregister()
+    }
+  })
+})
+```
+
+在组件中注册中间件时，请在组件卸载时调用返回的函数，例如使用 `onScopeDispose(unregister)`。如果要守卫离开当前页面，请改用 [`onBeforeRouteLeave`](https://router.vuejs.org/api/functions/onBeforeRouteLeave.html)。
+
+移除一个覆盖了 `app/middleware/` 目录中同名中间件的具名中间件，会恢复原来的中间件。如果该名称此后又被用不同的函数注册过，那么返回的函数不会做任何事情。
 
 ## 示例
 

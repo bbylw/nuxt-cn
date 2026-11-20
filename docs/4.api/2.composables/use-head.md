@@ -27,13 +27,13 @@ useHead({
 </script>
 ```
 
-:warning
+::warning
 如果数据来自用户或其他不可信来源，我们建议你查看 [`useHeadSafe`](/docs/api/composables/use-head-safe)。
-:
+::
 
-:note
+::note
 `useHead` 的属性可以是动态的，接受 `ref`、`computed` 和 `reactive` 属性。`meta` 参数也可以接受一个返回对象的函数，使整个对象可响应。
-:
+::
 
 ## 类型
 

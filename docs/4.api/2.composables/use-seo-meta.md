@@ -10,9 +10,9 @@ links:
 
 这有助于你避免常见的错误，例如使用 `name` 而不是 `property`，以及拼写错误——有 100 多个 meta 标签都已完整类型化。
 
-:important
+::important
 这是向你站点添加 meta 标签的推荐方式，因为它是 XSS 安全的，并且拥有完整的 TypeScript 支持。
-:
+::
 
 :read-more{to="/docs/getting-started/seo-meta"}
 

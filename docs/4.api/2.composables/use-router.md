@@ -26,9 +26,9 @@ const router = useRouter()
 
 如果你有 `app/pages/` 目录，`useRouter` 的行为与 `vue-router` 提供的相同。
 
-:read-more{icon="i-simple-icons-vuedotjs" to="https://router.vuejs.org/api/interfaces/router#Properties-currentRoute-" target="_blank"}
+::read-more{icon="i-simple-icons-vuedotjs" to="https://router.vuejs.org/api/interfaces/router#Properties-currentRoute-" target="_blank"}
 阅读 `vue-router` 关于 `Router` 接口的文档。
-:
+::
 
 ## 基础操作
 
@@ -48,9 +48,9 @@ router.hasRoute('home')
 router.resolve({ name: 'home' })
 ```
 
-:note
+::note
 `router.addRoute()` 将路由详情添加到一个路由数组中，在构建 [Nuxt 插件](/docs/directory-structure/app/plugins) 时很有用；而 `router.push()` 另一方面会立即触发新的导航，在页面、Vue 组件和组合式函数中很有用。
-:
+::
 
 ## 基于 History API
 
@@ -70,9 +70,9 @@ router.push({ path: '/home' })
 router.replace({ hash: '#bio' })
 ```
 
-:read-more{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/API/History" target="_blank"}
+::read-more{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/API/History" target="_blank"}
 阅读更多关于浏览器 History API 的内容。
-:
+::
 
 ## 导航守卫
 

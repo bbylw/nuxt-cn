@@ -12,9 +12,9 @@ links:
 
 `useHeadSafe` 组合式函数是 [`useHead`](/docs/api/composables/use-head) 组合式函数的封装，它限制输入只允许安全的值。这是在处理用户输入时管理 head 数据的推荐方式，因为它通过清理潜在危险的属性来防止 XSS 攻击。
 
-:warning
+::warning
 使用 `useHeadSafe` 时，像脚本中的 `innerHTML` 或 meta 标签中的 `http-equiv` 等潜在危险的属性会被自动剥离以防止 XSS 攻击。每当你处理用户生成的内容时，请使用此组合式函数。
-:
+::
 
 ## 类型
 
@@ -67,6 +67,6 @@ useHeadSafe({
 </script>
 ```
 
-:read-more{to="https://unhead.unjs.io/docs/typescript/head/api/composables/use-head-safe" target="_blank"}
+::read-more{to="https://unhead.unjs.io/docs/typescript/head/api/composables/use-head-safe" target="_blank"}
 在 `Unhead` 文档中阅读更多内容。
-:
+::

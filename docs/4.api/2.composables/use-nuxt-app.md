@@ -172,9 +172,9 @@ export default defineComponent({
 
 ### `runWithContext`
 
-:note
+::note
 你很可能是因为收到「Nuxt instance unavailable」消息才来到这里。请谨慎使用此方法，并报告导致问题的示例，以便最终能在框架层面解决。
-:
+::
 
 `runWithContext` 方法用于调用一个函数并为其提供显式的 Nuxt 上下文。通常，Nuxt 上下文是隐式传递的，你无需为此担心。然而，在处理中间件/插件中复杂的 `async`/`await` 场景时，你可能会遇到当前实例在异步调用后被取消设置的情况。
 
@@ -257,9 +257,9 @@ Vue 目前只支持 `<script setup>` 中异步/await 用法的异步上下文恢
 
 使用一个实验性新特性，可以启用原生异步上下文支持，通过 [Node.js `AsyncLocalStorage`](https://nodejs.org/api/async_context.html#class-asynclocalstorage) 和新的 unctx 支持，将异步上下文**原生地**提供给**任何嵌套的异步组合式函数**，而无需转换或手动传递/调用上下文。
 
-:tip
+::tip
 原生异步上下文支持目前可在 Bun 和 Node 中工作。
-:
+::
 
 :read-more{to="/docs/guide/going-further/experimental-features#asynccontext"}
 

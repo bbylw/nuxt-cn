@@ -8,9 +8,9 @@ links:
     size: xs
 ---
 
-:warning
+::warning
 `useServerSeoMeta` 已弃用。请改用将 [`useSeoMeta`](/docs/api/composables/use-seo-meta) 包裹在 `if (import.meta.server)` 代码块中的方式。在 `future.compatibilityVersion: 5` 下自动导入已被移除。
-:
+::
 
 `useServerSeoMeta` 让你将站点的 SEO meta 标签定义为一个扁平对象并提供完整的 TypeScript 支持，与 [`useSeoMeta`](/docs/api/composables/use-seo-meta) 完全一致，但它只运行在服务端，且会被从客户端打包中 tree-shake 掉。
 

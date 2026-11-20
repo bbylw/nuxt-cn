@@ -1,10 +1,10 @@
 ---
 title: "nuxt devtools"
-description: devtools 命令允许你基于每个项目启用或禁用 Nuxt DevTools。
+description: devtools 命令允许你按项目启用或禁用 Nuxt DevTools。
 links:
   - label: Source
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/cli/blob/main/packages/nuxi/src/commands/devtools.ts
+    to: https://github.com/nuxt/cli/blob/main/packages/nuxt-cli/src/commands/devtools.ts
     size: xs
 ---
 
@@ -14,25 +14,25 @@ npx nuxt devtools <COMMAND> [ROOTDIR] [--cwd=<directory>]
 ```
 <!--/devtools-cmd-->
 
-运行 `nuxt devtools enable` 会在全局安装 Nuxt DevTools，同时也会在你正在使用的特定项目中启用它。它会作为偏好被保存在你用户级别的 `.nuxtrc` 中。如果你想为某个特定项目移除 devtools 支持，可以运行 `nuxt devtools disable`。
+运行 `nuxt devtools enable` 会全局安装 Nuxt DevTools，并在你当前使用的项目中启用它。该偏好会保存在你的用户级 `.nuxtrc` 中。如果你想移除某个项目的 devtools 支持，可以运行 `nuxt devtools disable`。
 
 ## 参数
 
 <!--devtools-args-->
-| 参数         | 描述                                        |
-|--------------|---------------------------------------------|
-| `COMMAND`    | 要运行的命令（可选项：<enable\|disable>）  |
-| `ROOTDIR="."`| 指定工作目录（默认值：`.`）                 |
+| 参数                        | 描述                                          |
+|-----------------------------|-----------------------------------------------|
+| `COMMAND=<enable\|disable>` | 要运行的命令                                  |
+| `ROOTDIR`                   | 你的 Nuxt 项目的根目录（默认值：`.`）         |
 <!--/devtools-args-->
 
 ## 选项
 
 <!--devtools-opts-->
-| 选项              | 默认值  | 描述                                                       |
-|-------------------|---------|-----------------------------------------------------------|
-| `--cwd=<directory>` |         | 指定工作目录，优先级高于 ROOTDIR（默认值：`.`）           |
+| 选项                | 默认值 | 描述                             |
+|---------------------|--------|----------------------------------|
+| `--cwd=<directory>` |        | 指定你的 Nuxt 项目的根目录       |
 <!--/devtools-opts-->
 
-:read-more{icon="i-simple-icons-nuxtdotjs" to="https://devtools.nuxt.com" target="_blank"}
-阅读更多关于 **Nuxt DevTools** 的内容。
-:
+::read-more{icon="i-simple-icons-nuxtdotjs" to="https://devtools.nuxt.com" target="\_blank"}
+阅读关于 **Nuxt DevTools** 的更多内容。
+::

@@ -8,11 +8,11 @@ links:
     size: xs
 ---
 
-该组合式函数提供了对 [`useAsyncData`](/docs/api/composables/use-async-data) 和 [`$fetch`](/docs/api/utils/dollarfetch) 的便捷封装。它会自动为请求生成 key，基于服务端路由提供请求 url 的类型提示，并推断 API 响应类型。
+该组合式函数提供了对 [`useAsyncData`](/docs/api/composables/use-async-data) 和 [`$fetch`](/docs/api/utils/$fetch) 的便捷封装。它会自动为请求生成 key，基于服务端路由提供请求 url 的类型提示，并推断 API 响应类型。
 
-:note
+::note
 `useFetch` 是一个组合式函数，意在 setup 函数、插件或路由中间件中直接调用。它返回可响应的组合式值，并处理将响应添加到 Nuxt payload 中，这样它们就可以从服务端传递到客户端，在页面 hydration 时无需在客户端重新获取数据。
-:
+::
 
 ## 用法
 
@@ -24,17 +24,21 @@ const { data, status, error, refresh, clear } = await useFetch('/api/modules', {
 </script>
 ```
 
-:tip{to="/docs/guide/recipes/custom-usefetch#custom-usefetch-with-createusefetch"}
+::tip{to="/docs/guide/recipes/custom-usefetch#recipe-api-client-with-auth"}
 需要一个带有预定义默认值（如 `baseURL` 或鉴权请求头）的自定义 `useFetch`？使用 `createUseFetch` 创建一个完全类型化的自定义组合式函数。
-:
+::
 
-:note
+::note
 你无需 `await` `useFetch`。在服务端，无论哪种情况 Nuxt 都会等待 promise 解析完成后再渲染，因此返回的 HTML 始终包含数据。`await` 影响的是调用之后发生的事情：使用它时，执行会暂停直到 `data` 被填充，且客户端导航会阻塞直到数据就绪；不使用它时，执行立即继续，`data` 在请求解析完成前保持其默认值，在客户端导航时你需要使用返回的 `status` 和 `error` ref 自行处理加载和错误状态。这与 [`lazy`](#parameters) 选项效果类似，不过 `lazy` 是显式选择非阻塞导航的方式。
-:
+::
 
-:note
+::note
 `data`、`status` 和 `error` 是 Vue ref，在 `<script setup>` 中通过 `.value` 访问它们的值，而 `refresh`/`execute` 和 `clear` 是普通函数。
-:
+::
+
+::note
+请求 URL、响应，以及匹配 handler 所做的任何 `body`、`query` 或 `headers` 校验，其类型都来自你的服务端所提供的那些路由。在运行时构建的路径会被解析为 `unknown`，而显式命名响应类型（`useFetch<Todo[]>(url)`）会覆盖 Nuxt 解析出的任何类型。阅读更多有关[类型化路由](/docs/getting-started/data-fetching#typed-routes)的内容。
+::
 
 使用 `query` 选项，你可以为查询添加搜索参数。该选项继承自 [unjs/ofetch](https://github.com/unjs/ofetch) 并使用 [unjs/ufo](https://github.com/unjs/ufo) 来创建 URL。对象会自动字符串化。
 
@@ -85,7 +89,7 @@ const { data: post } = await useFetch(() => `/api/posts/${id.value}`)
 
 自动生成的 key 对每个调用位置是唯一的，因此在不同组件中以相同的 URL 和选项调用 `useFetch` **不会**共享状态，每次调用都会执行自己的请求。同一个组件的多个实例会共享状态，因为它们使用相同的调用位置。要在不同组件间共享相同的 `data`、`error` 和 `status` ref，请为每个调用提供相同的显式 `key`：
 
-:code-group
+::code-group
 
 ```vue [app/components/ComponentA.vue]
 <script setup lang="ts">
@@ -101,19 +105,19 @@ const { data } = await useFetch('/api/random', { key: 'random' })
 </script>
 ```
 
-:
+::
 
-:tip
+::tip
 使用 `useFetch` 创建的 keyed 状态可以通过 [`useNuxtData`](/docs/api/composables/use-nuxt-data) 在你的 Nuxt 应用中获取。
-:
+::
 
-:warning
-`useFetch` 是编译器转换的保留函数名，因此你不应该把自己的函数命名为 `useFetch`。要创建带有预定义选项的自定义变体，请改用 [`createUseFetch`](/docs/guide/recipes/custom-usefetch#custom-usefetch-with-createusefetch)。
-:
+::warning
+`useFetch` 是编译器转换的保留函数名，因此你不应该把自己的函数命名为 `useFetch`。要创建带有预定义选项的自定义变体，请改用 [`createUseFetch`](/docs/api/composables/create-use-fetch)。
+::
 
-:warning
+::warning
 如果你遇到从 `useFetch` 解构出的 `data` 变量返回的是字符串而不是 JSON 解析对象，请确保你的组件没有导入类似 `import { useFetch } from '@vueuse/core` 的语句。
-:
+::
 
 :video-accordion{title="观看 Alexander Lichter 关于避免错误使用 useFetch 的视频" videoId="njsGVmcWviY"}
 
@@ -156,7 +160,6 @@ type UseFetchOptions<ResT, DataT = ResT> = {
   key?: MaybeRefOrGetter<string>
   method?: MaybeRefOrGetter<string>
   query?: MaybeRefOrGetter<SearchParams>
-  params?: MaybeRefOrGetter<SearchParams>
   body?: MaybeRefOrGetter<RequestInit['body'] | Record<string, any>>
   headers?: MaybeRefOrGetter<Record<string, string> | [key: string, value: string][] | Headers>
   baseURL?: MaybeRefOrGetter<string>
@@ -169,6 +172,8 @@ type UseFetchOptions<ResT, DataT = ResT> = {
   dedupe?: 'cancel' | 'defer'
   timeout?: number
   enabled?: MaybeRefOrGetter<boolean>
+  serialize?: boolean
+  middleware?: AsyncDataMiddleware<ResT>[]
   default?: () => DataT | Ref<DataT>
   transform?: (input: ResT) => DataT | Promise<DataT>
   pick?: string[]
@@ -210,8 +215,7 @@ type AsyncDataRequestStatus = 'idle' | 'pending' | 'success' | 'error'
 |---------------------------------------------------------------------------|-------------------------------------------------------------------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `key` | `MaybeRefOrGetter<string>` | 自动生成 | 用于去重的唯一 key。如果未提供，则从 URL、选项和源代码中的调用位置生成。 |
 | `method` | `MaybeRefOrGetter<string>` | `'GET'` | HTTP 请求方法。 |
-| `query` | `MaybeRefOrGetter<SearchParams>` | - | 要附加到 URL 的查询/搜索参数。别名：`params`。 |
-| `params` | `MaybeRefOrGetter<SearchParams>` | - | `query` 的别名。 |
+| `query` | `MaybeRefOrGetter<SearchParams>` | - | 要附加到 URL 的查询/搜索参数。 |
 | `body` | `MaybeRefOrGetter<RequestInit['body'] \| Record<string, any>>` | - | 请求体。对象会自动字符串化。 |
 | `headers` | `MaybeRefOrGetter<Record<string, string> \| [key, value][] \| Headers>` | - | 请求头。 |
 | `baseURL` | `MaybeRefOrGetter<string>` | - | 请求的基础 URL。 |
@@ -228,11 +232,13 @@ type AsyncDataRequestStatus = 'idle' | 'pending' | 'success' | 'error'
 | `deep` :badge[v3.8]{color="info" size="xs" class="align-middle"} | `boolean` | `false` | 以深层 ref 对象形式返回数据。默认为 `false` 以获得更好性能（浅层 ref 对象）。 |
 | `dedupe` :badge[v3.9]{color="info" size="xs" class="align-middle"} | `'cancel' \| 'defer'` | `'cancel'` | 避免同时对同一 key 多次获取。 |
 | `enabled` :badge[v4.5]{color="info" size="xs" class="align-middle"} | `boolean` | `true` | 控制请求是否可以运行的屏障。为 `false` 时，每次执行都会被阻塞（初始获取、`execute`/`refresh` 和 watch 触发），且从 `true` → `false` 切换会取消任何进行中的请求而不清除 `data`。重新启用不会自行重新获取。 |
+| `serialize` :badge[v4.6]{color="info" size="xs" class="align-middle"} | `boolean` | `true` | 是否把解析后的数据存入 Nuxt payload（`__NUXT_DATA__`）。为 `false` 时，服务端获取的数据不会进入 payload，如果有组件渲染它，客户端会在 hydration 之后重新获取。配合[延迟水合（lazy hydration）](/docs/guide/best-practices/performance#lazy-hydration)使用可以避免 hydration 不匹配和不必要的客户端请求。 |
+| `middleware` :badge[v4.6]{color="info" size="xs" class="align-middle"} | `AsyncDataMiddleware[]` | - | 包裹请求执行的函数。每一项都会接收 `next`，它用于执行链中剩余的部分并解析为数据，同时接收 handler 上下文（`{ signal }`）。第一个条目是最外层的包裹。调用 `next()` 以继续，或抛出错误以中止。 |
 | `$fetch` :badge[v3.2]{color="info" size="xs" class="align-middle"} | `typeof globalThis.$fetch` | - | 自定义 $fetch 实现。参见 [Nuxt 中的自定义 useFetch](/docs/guide/recipes/custom-usefetch) |
 
-:note
+::note
 所有 fetch 选项都可以给定 `computed` 或 `ref` 值。这些会被监视，并在更新时使用任何新值自动发起新请求（除非 `watch` 设为 `false`）。
-:
+::
 
 **getCachedData 默认值：**
 
@@ -247,13 +253,13 @@ const getDefaultCachedData = (key, nuxtApp, ctx) => nuxtApp.isHydrating
 
 该组合式函数返回一个可以 await 的 `Promise`，这使得可以在 `<script setup>` 中直接使用 `data`（即会有一个值存在，而不是 undefined）。你也可以在不 await 返回值的情况下直接解构这些值，这种情况下直到获取完成之前 `data` 在 `<script setup>` 中可能仍为 undefined。
 
-:tip
+::tip
 即使你不 await 返回值，在 SSR 期间 Nuxt 也会等待请求完成并将解析后的数据发送到客户端。
-:
+::
 
-:note
+::note
 如果你没有在服务端获取数据（例如使用 `server: false`），那么数据在 hydration 完成之前**不会**被获取。这意味着即使在客户端 await [`useFetch`](/docs/api/composables/use-fetch)，`data` 在 `<script setup>` 中也会保持 `undefined`。
-:
+::
 
 | 名称 | 类型 | 描述 |
 |-----------|-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -265,9 +271,9 @@ const getDefaultCachedData = (key, nuxtApp, ctx) => nuxtApp.isHydrating
 | `pending` | `Ref<boolean>` | 请求进行中为 `true`。配合 [`experimental.pendingWhenIdle`](/docs/guide/going-further/experimental-features#pendingwhenidle)，当 `status` 为 `idle` 且没有可用缓存数据时也为 `true`。 |
 | `clear` | `() => void` | 将 `data` 重置为 `undefined`（或提供了 `options.default()` 时为其值），`error` 重置为 `undefined`，将 `status` 设为 `idle`，并取消任何挂起的请求。 |
 
-:tip
+::tip
 如果你没有 await 返回值，来自 `Promise` 的函数（`then`、`catch` 和 `finally`）可以被安全解构。
-:
+::
 
 ### 状态值
 

@@ -18,6 +18,6 @@ const event = useRequestEvent()
 const url = event?.path
 ```
 
-:tip
+::tip
 在浏览器中，`useRequestEvent` 会返回 `undefined`。
-:
+::

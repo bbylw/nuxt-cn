@@ -9,9 +9,9 @@ links:
     size: xs
 ---
 
-:important
+::important
 该组合式函数在 Nuxt v3.14+ 中可用。
-:
+::
 
 你可以在你的页面、组件和插件中使用内置的 [`useResponseHeader`](/docs/api/composables/use-response-header) 组合式函数来设置任意服务端响应头。
 

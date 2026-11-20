@@ -16,13 +16,13 @@ links:
 const cookie = useCookie(name, options)
 ```
 
-:note
+::note
 `useCookie` 只能在 [Nuxt 上下文](/docs/guide/going-further/nuxt-app#the-nuxt-context) 中使用。
-:
+::
 
-:tip
+::tip
 返回的 ref 会自动将 cookie 值序列化和反序列化为 JSON。
-:
+::
 
 ## 类型
 

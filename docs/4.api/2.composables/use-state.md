@@ -17,13 +17,13 @@ const count = useState('counter', () => Math.round(Math.random() * 100))
 
 :read-more{to="/docs/getting-started/state-management"}
 
-:important
+::important
 因为 `useState` 内部的数据会被序列化为 JSON，所以它重要的一点是不能包含任何无法被序列化的内容，例如类、函数或符号。
-:
+::
 
-:warning
+::warning
 `useState` 是编译器转换的保留函数名，因此你不应该把自己的函数命名为 `useState`。
-:
+::
 
 :video-accordion{title="观看 Alexander Lichter 关于为什么以及何时使用 useState 的视频" videoId="mv0WcBABcIk"}
 

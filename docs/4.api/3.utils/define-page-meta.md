@@ -220,7 +220,7 @@ definePageMeta({
 
 两个路由 "/test-category" 和 "/1234-post" 都同时匹配 `[postId]-[postSlug].vue` 和 `[categorySlug].vue` 页面路由。
 
-为了确保我们只在 `[postId]-[postSlug]` 路由中匹配数字（`\d+`），我们可以在 `[postId]-[postSlug].vue` 页面模板中添加以下内容：
+为了确保我们只在 `[postId]-[postSlug]` 路由中为 `postId` 匹配数字（`\d+`），我们可以在 `[postId]-[postSlug].vue` 页面模板中添加以下内容：
 
 ```vue [app/pages/[postId\\]-[postSlug\\].vue]
 <script setup lang="ts">
@@ -252,7 +252,7 @@ definePageMeta({
 
 你可以使用 `layout` 的对象语法向布局传递 props。如果你的布局用 `defineProps` 定义 props，这些 props 会被完全类型化。
 
-:code-group
+::code-group
 
 ```vue [app/pages/dashboard.vue]
 <script setup lang="ts">
@@ -289,10 +289,10 @@ const props = defineProps<{
 </template>
 ```
 
-:
+::
 
-:tip
+::tip
 通过 `definePageMeta` 设置的布局 props 是基于布局的 `defineProps` 完全类型化的。你会在编辑器中获得自动补全和类型检查。
-:
+::
 
 :read-more{to="/docs/directory-structure/app/layouts#passing-props-to-layouts"}

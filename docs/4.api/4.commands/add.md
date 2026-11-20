@@ -1,112 +1,66 @@
 ---
 title: "nuxt add"
-description: "在你的 Nuxt 应用中快速搭建一个实体（文件）。"
+description: "向你的 Nuxt 应用添加模块和层。"
 links:
   - label: Source
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/cli/blob/main/packages/nuxi/src/commands/add-template.ts
+    to: https://github.com/nuxt/cli/blob/main/packages/nuxt-cli/src/commands/add.ts
     size: xs
 ---
 
 <!--add-cmd-->
 ```bash [Terminal]
-npx nuxt add <TEMPLATE> <NAME> [--cwd=<directory>] [--logLevel=<silent|info|verbose>] [--force]
+npx nuxt add <MODULENAME...> [--cwd=<directory>] [--logLevel=<silent|info|verbose>] [--skipInstall] [--skipConfig] [--dev] [--packageManager=<npm|pnpm|yarn|bun|deno|aube|nub|upm>]
 ```
 <!--/add-cmd-->
+
+`add` 命令会把 [Nuxt 模块](/modules)和[层](/docs/getting-started/layers)安装进你的应用。它与 [`nuxt module add`](/docs/api/commands/module#nuxt-module-add) 是同一个命令，此外还支持层。
 
 ## 参数
 
 <!--add-args-->
-| 参数        | 描述                                                                                                                                                                                                           |
-|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `TEMPLATE`  | 指定要生成的模板（可选项：<api\|app\|app-config\|component\|composable\|error\|layer\|layout\|middleware\|module\|page\|plugin\|server-middleware\|server-plugin\|server-route\|server-util>） |
-| `NAME`      | 指定所生成文件的名称                                                                                                                                                                                         |
+| 参数            | 描述                                                           |
+|-----------------|----------------------------------------------------------------|
+| `MODULENAME...` | 指定一个或多个要安装的模块或层，按名称给出，以空格分隔         |
 <!--/add-args-->
 
 ## 选项
 
 <!--add-opts-->
-| 选项                                 | 默认值  | 描述                               |
-|--------------------------------------|---------|------------------------------------|
-| `--cwd=<directory>`                  | `.`     | 指定工作目录                       |
-| `--logLevel=<silent\|info\|verbose>` |         | 指定构建时的日志级别               |
-| `--force`                            | `false` | 如果文件已存在则强制覆盖           |
+| 选项                                                            | 默认值 | 描述                             |
+|-----------------------------------------------------------------|--------|----------------------------------|
+| `--cwd=<directory>`                                             | `.`    | 指定你的 Nuxt 项目的根目录       |
+| `--logLevel=<silent\|info\|verbose>`                            |        | 指定构建时的日志级别             |
+| `--skipInstall`                                                 |        | 跳过 npm install                 |
+| `--skipConfig`                                                  |        | 跳过 nuxt.config.ts 的更新       |
+| `--dev`                                                         |        | 将模块作为开发依赖安装           |
+| `--packageManager=<npm\|pnpm\|yarn\|bun\|deno\|aube\|nub\|upm>` |        | 用于安装的包管理器               |
 <!--/add-opts-->
 
-**修饰符：**
+运行该命令时，它会：
 
-部分模板支持额外的修饰符标志，用于为名称添加后缀（例如 `.client` 或 `.get`）。
+- 使用你的包管理器将该包作为依赖安装，除非你传入 `--skipInstall`
+- 将其添加到你的 [`package.json`](/docs/directory-structure/package) 文件中
+- 在你的 [`nuxt.config`](/docs/directory-structure/nuxt-config) 文件中注册它：模块写入 `modules`，层写入 `extends`，除非你传入 `--skipConfig`
 
-```bash [Terminal]
-# 生成 `/plugins/sockets.client.ts`
-npx nuxt add plugin sockets --client
-```
-
-## `nuxt add component`
-
-* 修饰符标志：`--mode client|server` 或 `--client` 或 `--server`
+**示例：**
 
 ```bash [Terminal]
-# 生成 `app/components/TheHeader.vue`
-npx nuxt add component TheHeader
+npx nuxt add pinia
 ```
 
-## `nuxt add composable`
+可以一次添加多个包，并且模块会依据你项目所使用的 Nuxt 版本来解析：
 
 ```bash [Terminal]
-# 生成 `app/composables/foo.ts`
-npx nuxt add composable foo
+npx nuxt add @nuxt/image @nuxt/fonts
 ```
 
-## `nuxt add layout`
+不带名称运行它，即可交互式地浏览可用的模块。
 
-```bash [Terminal]
-# 生成 `app/layouts/custom.vue`
-npx nuxt add layout custom
-```
+:::note
+`nuxt add <template> <name>` 已被弃用。请使用 [`nuxt add-template`](/docs/api/commands/add-template) 来搭建文件脚手架。
+:::
 
-## `nuxt add plugin`
-
-* 修饰符标志：`--mode client|server` 或 `--client`或 `--server`
-
-```bash [Terminal]
-# 生成 `app/plugins/analytics.ts`
-npx nuxt add plugin analytics
-```
-
-## `nuxt add page`
-
-```bash [Terminal]
-# 生成 `app/pages/about.vue`
-npx nuxt add page about
-```
-
-```bash [Terminal]
-# 生成 `app/pages/category/[id].vue`
-npx nuxt add page "category/[id]"
-```
-
-## `nuxt add middleware`
-
-* 修饰符标志：`--global`
-
-```bash [Terminal]
-# 生成 `app/middleware/auth.ts`
-npx nuxt add middleware auth
-```
-
-## `nuxt add api`
-
-* 修饰符标志：`--method`（可接收 `connect`、`delete`、`get`、`head`、`options`、`patch`、`post`、`put` 或 `trace`）或者你也可以直接使用 `--get`、`--post` 等。
-
-```bash [Terminal]
-# 生成 `server/api/hello.ts`
-npx nuxt add api hello
-```
-
-## `nuxt add layer`
-
-```bash [Terminal]
-# 生成 `layers/subscribe/nuxt.config.ts`
-npx nuxt add layer subscribe
-```
+::read-more{to="/docs/api/commands/module"}
+阅读更多关于搜索和移除模块的内容。
+::

@@ -38,13 +38,13 @@ const LazyHydrationMyComponent = defineLazyHydrationComponent(
 
 `hydrateOnVisible` prop 是可选的。你可以传入一个对象来定制底层 `IntersectionObserver` 的行为。
 
-:read-more{to="https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver" title="IntersectionObserver options"}
+::read-more{to="https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver" title="IntersectionObserver options"}
 阅读更多关于 `hydrate-on-visible` 选项的说明。
-:
+::
 
-:note
+::note
 在底层，这使用了 Vue 内置的 [`hydrateOnVisible` 策略](https://vuejs.org/guide/components/async#hydrate-on-visible)。
-:
+::
 
 ### 空闲策略（Idle Strategy）
 
@@ -70,9 +70,9 @@ const LazyHydrationMyComponent = defineLazyHydrationComponent(
 
 空闲策略适用于可以在浏览器空闲时进行 hydration 的组件。
 
-:note
+::note
 在底层，这使用了 Vue 内置的 [`hydrateOnIdle` 策略](https://vuejs.org/guide/components/async#hydrate-on-idle)。
-:
+::
 
 ### 交互策略（Interaction Strategy）
 
@@ -99,9 +99,9 @@ const LazyHydrationMyComponent = defineLazyHydrationComponent(
 
 `hydrateOnInteraction` prop 是可选的。如果你不传入事件或事件列表，它默认在 `pointerenter`、`click` 和 `focus` 时触发 hydration。
 
-:note
+::note
 在底层，这使用了 Vue 内置的 [`hydrateOnInteraction` 策略](https://vuejs.org/guide/components/async#hydrate-on-interaction)。
-:
+::
 
 ### 媒体查询策略（Media Query Strategy）
 
@@ -126,9 +126,9 @@ const LazyHydrationMyComponent = defineLazyHydrationComponent(
 </template>
 ```
 
-:note
+::note
 在底层，这使用了 Vue 内置的 [`hydrateOnMediaQuery` 策略](https://vuejs.org/guide/components/async#hydrate-on-media-query)。
-:
+::
 
 ### 时间策略（Time Strategy）
 
@@ -229,7 +229,7 @@ function onHydrate () {
 
 ## 参数
 
-:warning
+::warning
 为了确保编译器能正确识别这个宏，请避免使用外部变量。下面的写法会导致宏无法被正确识别：
 
 ```vue
@@ -240,7 +240,7 @@ const LazyHydrationMyComponent = defineLazyHydrationComponent(strategy, source)
 </script>
 ```
 
-:
+::
 
 ### `strategy`
 

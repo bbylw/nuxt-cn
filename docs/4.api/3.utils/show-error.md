@@ -24,8 +24,8 @@ showError({
 
 该错误通过 [`useError()`](/docs/api/composables/use-error) 设置在状态中，从而在组件间创建一个可响应的、SSR 友好的共享错误状态。
 
-:tip
+::tip
 `showError` 会调用 `app:error` 钩子。
-:
+::
 
 :read-more{to="/docs/getting-started/error-handling"}

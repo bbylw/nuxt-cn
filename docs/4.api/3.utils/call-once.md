@@ -9,9 +9,9 @@ links:
     size: xs
 ---
 
-:important
+::important
 该工具自 [Nuxt v3.9](/blog/v3-9) 起可用。
-:
+::
 
 ## 用途
 
@@ -49,23 +49,23 @@ await callOnce(async () => {
 </script>
 ```
 
-:important
+::important
 `navigation` 模式自 [Nuxt v3.15](/blog/v3-15) 起可用。
-:
+::
 
-:tip{to="/docs/getting-started/state-management#usage-with-pinia"}
+::tip{to="/docs/getting-started/state-management#usage-with-pinia"}
 `callOnce` 与 [Pinia 模块](/modules/pinia) 搭配使用来调用 store 的 action 很有用。
-:
+::
 
 :read-more{to="/docs/getting-started/state-management"}
 
-:warning
+::warning
 注意 `callOnce` 不返回任何值。如果你希望在 SSR 期间获取数据，应该使用 [`useAsyncData`](/docs/api/composables/use-async-data) 或 [`useFetch`](/docs/api/composables/use-fetch)。
-:
+::
 
-:note
+::note
 `callOnce` 是一个组合式函数，意为应当直接在 setup 函数、插件或路由中间件中调用，因为它需要向 Nuxt payload 添加数据，以避免在页面 hydration 时于客户端重新调用该函数。
-:
+::
 
 ## 类型
 

@@ -8,9 +8,9 @@ links:
     size: xs
 ---
 
-:warning
+::warning
 `abortNavigation` 只能在[路由中间件处理器](/docs/directory-structure/app/middleware)内部使用。
-:
+::
 
 ## 类型
 

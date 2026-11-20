@@ -18,10 +18,10 @@ await prefetchComponents('MyGlobalComponent')
 await prefetchComponents(['MyGlobalComponent1', 'MyGlobalComponent2'])
 ```
 
-:note
+::note
 当前的实现行为与 [`preloadComponents`](/docs/api/utils/preload-components) 完全相同（通过预加载而非仅预取的方式），我们正在努力改进这一行为。
-:
+::
 
-:note
+::note
 在服务端，`prefetchComponents` 没有任何效果。
-:
+::

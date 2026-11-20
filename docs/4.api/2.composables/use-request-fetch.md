@@ -14,16 +14,20 @@ links:
 当发起客户端 fetch 请求时，浏览器会自动发送必要的请求头。
 然而，在服务端渲染期间发起请求时，出于安全考虑，我们需要手动转发请求头。
 
-:note
+::note
 **不打算转发**的请求头将**不会**包含在请求中。这些请求头包括，例如：
 `transfer-encoding`、`connection`、`keep-alive`、`upgrade`、`expect`、`host`、`accept`
-:
+::
 
-:tip
+::important
+请求头只会转发到以 `/` 开头的路径（例如 `/api/cookies`）。对绝对 URL（包括指向你自己应用的那个）发起的请求不会携带这些请求头。
+::
+
+::tip
 [`useFetch`](/docs/api/composables/use-fetch) 组合式函数在底层使用 `useRequestFetch` 来自动转发请求上下文和请求头。
-:
+::
 
-:code-group
+::code-group
 
 ```vue [app/pages/index.vue]
 <script setup lang="ts">
@@ -46,8 +50,8 @@ export default defineEventHandler((event) => {
 })
 ```
 
-:
+::
 
-:tip
-在客户端导航期间的浏览器中，`useRequestFetch` 的行为就像常规 [`$fetch`](/docs/api/utils/dollarfetch) 一样。
-:
+::tip
+在客户端导航期间的浏览器中，`useRequestFetch` 的行为就像常规 [`$fetch`](/docs/api/utils/$fetch) 一样。
+::

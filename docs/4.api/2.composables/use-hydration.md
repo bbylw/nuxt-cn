@@ -10,19 +10,19 @@ links:
 
 `useHydration` 是一个内置的组合式函数，提供一种方式：在每次发起新的 HTTP 请求时于服务端设置数据，并在客户端接收这些数据。通过这种方式，`useHydration` 让你完全控制 hydration 周期。
 
-:note
+::note
 这是一个高级组合式函数，主要设计用于插件中，多数由 Nuxt 模块使用。
-:
+::
 
-:note
+::note
 `useHydration` 旨在**确保 SSR 期间的状态同步与恢复**。如果你需要创建在 Nuxt 中 SSR 友好的全局响应状态，[`useState`](/docs/api/composables/use-state) 是推荐的选择。
-:
+::
 
 ## 用法
 
 服务端 `get` 函数返回的数据会被存储在 `nuxtApp.payload` 中，key 为传给 `useHydration` 的第一个参数提供的唯一 key。在 hydration 期间，这些数据随后会在客户端被取回，从而避免冗余的计算或 API 调用。
 
-:code-group
+::code-group
 
 ```ts [With useHydration]
 export default defineNuxtPlugin((nuxtApp) => {
@@ -53,7 +53,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   }
 })
 ```
-:
+::
 
 ## 类型
 
@@ -67,7 +67,7 @@ export function useHydration<T> (key: string, get: () => T, set: (value: T) => v
 | --- | --- | --- |
 | `key` | `string` | 在你的 Nuxt 应用中标识该数据的唯一 key。 |
 | `get` | `() => T` | **仅在服务端**执行的函数（SSR 渲染完成时调用）以设置初始值。 |
-| `set` | `(value: T) => void` | **仅在客户端**执行的函数（初始 Vue 实例创建时调用）以接收数据。 |
+| `set` | `(value: T) => void` | **仅在客户端**执行的函数（在应用创建时调用，如果在 hydration 期间较晚注册，则立即调用）以接收数据。 |
 
 ## 返回值
 

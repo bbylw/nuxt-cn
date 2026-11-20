@@ -34,17 +34,17 @@ const { status, data: posts } = await useLazyFetch('/api/posts')
 </template>
 ```
 
-:note
+::note
 `useLazyFetch` 与 [`useFetch`](/docs/api/composables/use-fetch) 拥有相同的签名。
-:
+::
 
-:warning
+::warning
 await `useLazyFetch` 会初始化调用但不会等待数据。在客户端导航时，使用结果前请在组件模板中检查 `status === 'pending'` 和 `status === 'error'`。
-:
+::
 
-:warning
+::warning
 `useLazyFetch` 是编译器转换的保留函数名，因此你不应该把自己的函数命名为 `useLazyFetch`。
-:
+::
 
 ## 类型
 
@@ -55,9 +55,9 @@ export function useLazyFetch<ResT, ErrorT = NuxtError<unknown>, DataT = ResT> (
 ): AsyncData<DataT, ErrorT> & Promise<AsyncData<DataT, ErrorT>>
 ```
 
-:note
+::note
 `useLazyFetch` 等同于设置了 `lazy: true` 选项的 `useFetch`。完整类型定义见 [`useFetch`](/docs/api/composables/use-fetch)。
-:
+::
 
 ## 参数
 

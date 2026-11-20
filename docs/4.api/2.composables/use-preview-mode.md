@@ -50,9 +50,9 @@ const { enabled, state } = usePreviewMode({
 })
 ```
 
-:note
+::note
 `getState` 函数会将其返回的值追加到当前 state 中，因此请注意不要意外覆盖重要的 state。
-:
+::
 
 ### 自定义 `onEnable` 和 `onDisable` 回调
 
@@ -111,6 +111,6 @@ npx nuxt preview
 
 然后你可以通过在想要查看的页面末尾加上查询参数 `preview` 来查看预览页面，例如 `http://localhost:3000/?preview=true`。
 
-:note
+::note
 `usePreviewMode` 应当在本地使用 `nuxt generate` 再配合 `nuxt preview` 来测试，而不是 `nuxt dev`。（[preview 命令](/docs/api/commands/preview) 与预览模式无关。）
-:
+::

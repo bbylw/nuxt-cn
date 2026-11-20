@@ -8,9 +8,9 @@ links:
     size: xs
 ---
 
-:note
+::note
 在 Vue 组件的模板中，你可以使用 `$route` 访问路由。
-:
+::
 
 `useRoute` 组合式函数是对 `vue-router` 中同名组合式函数的封装，用于在 Nuxt 应用中访问当前路由。
 
@@ -71,13 +71,13 @@ import { useRoute } from '#app'
 中间件中没有「当前路由」的概念。
 `useRoute()` 组合式函数只应在 Vue 组件的 setup 函数或 Nuxt 插件中使用。
 
-:warning
+::warning
 这也适用于任何内部使用了 `useRoute()` 的组合式函数。
-:
+::
 
-:read-more{to="/docs/directory-structure/app/middleware"}
+::read-more{to="/docs/directory-structure/app/middleware"}
 在中间件章节阅读更多关于访问路由的内容。
-:
+::
 
 ### `route.fullPath` 的 hydration 问题
 

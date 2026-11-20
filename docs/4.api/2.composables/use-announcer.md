@@ -9,9 +9,9 @@ links:
     size: xs
 ---
 
-:important
+::important
 该组合式函数在 Nuxt v4.4.2+ 中可用。
-:
+::
 
 ## 描述
 
@@ -120,10 +120,10 @@ watch(results, (newResults) => {
 </script>
 ```
 
-:callout
+::callout
 你需要将 [`<NuxtAnnouncer>`](/docs/api/components/nuxt-announcer) 组件添加到你的应用中，播报内容才会被渲染到 DOM 中。
-:
+::
 
-:callout
+::callout
 对于路由/页面变化的自动播报，请改用 [`useRouteAnnouncer`](/docs/api/composables/use-route-announcer) 配合 [`<NuxtRouteAnnouncer>`](/docs/api/components/nuxt-route-announcer) 组件。
-:
+::

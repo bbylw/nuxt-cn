@@ -44,9 +44,9 @@ export default defineNuxtConfig({
 })
 ```
 
-:note
+::note
 需要在服务端访问的变量直接添加在 `runtimeConfig` 内。需要同时在客户端和服务端访问的变量定义在 `runtimeConfig.public` 中。
-:
+::
 
 :read-more{to="/docs/guide/going-further/runtime-config"}
 
@@ -87,13 +87,13 @@ NUXT_PUBLIC_API_BASE = "https://api.localhost:5555"
 NUXT_API_SECRET = "123"
 ```
 
-:note
+::note
 在 `.env` 文件中设置的任何环境变量，在 Nuxt 应用**开发**和**构建/生成**期间都可以通过 `process.env` 访问。
-:
+::
 
-:warning
+::warning
 在**生产运行时**，你应该使用平台环境变量，`.env` 不会被使用。
-:
+::
 
 :read-more{to="/docs/directory-structure/env"}
 
@@ -101,9 +101,9 @@ NUXT_API_SECRET = "123"
 
 Nuxt 在 runtime-config 中使用 `app` 命名空间，其 key 包括 `baseURL` 和 `cdnURL`。你可以在运行时通过设置环境变量来自定义它们的值。
 
-:note
+::note
 这是一个保留命名空间。你不应该在 `app` 内引入额外的 key。
-:
+::
 
 ### `app.baseURL`
 

@@ -9,15 +9,15 @@ links:
     size: xs
 ---
 
-:note
+::note
 `reloadNuxtApp` 会对你的应用执行一次硬刷新，从服务端重新请求页面及其依赖项。
-:
+::
 
 默认情况下，它还会保存你应用的当前 `state`（即你可以通过 `useState` 访问到的任何状态）。
 
-:read-more{to="/docs/guide/going-further/experimental-features#restorestate" icon="i-lucide-star"}
+::read-more{to="/docs/guide/going-further/experimental-features#restorestate" icon="i-lucide-star"}
 你可以在 `nuxt.config` 文件中启用 `experimental.restoreState` 选项来启用对该状态的实验性恢复。
-:
+::
 
 ## 类型
 

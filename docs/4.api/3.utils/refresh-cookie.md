@@ -9,9 +9,9 @@ links:
     size: xs
 ---
 
-:important
+::important
 该工具自 [Nuxt v3.10](/blog/v3-10) 起可用。
-:
+::
 
 ## 用途
 
@@ -34,9 +34,9 @@ const loggedIn = computed(() => !!tokenCookie.value)
 </script>
 ```
 
-:note{to="/docs/guide/going-further/experimental-features#cookiestore"}
+::note{to="/docs/guide/going-further/experimental-features#cookiestore"}
 自 [Nuxt v3.12.0](https://github.com/nuxt/nuxt/releases/tag/v3.12.0) 起，实验性的 `cookieStore` 选项默认已启用。它会在浏览器中的 cookie 发生变化时自动刷新 `useCookie` 的值。
-:
+::
 
 ## 类型
 

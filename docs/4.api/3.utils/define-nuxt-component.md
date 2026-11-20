@@ -8,13 +8,13 @@ links:
     size: xs
 ---
 
-:note
+::note
 `defineNuxtComponent()` 是一个用于使用 Options API 定义类型安全的 Vue 组件的辅助函数，类似于 [`defineComponent()`](https://vuejs.org/api/general#define-component)。`defineNuxtComponent()` 包装器还增加了对 `asyncData` 和 `head` 组件选项的支持。
-:
+::
 
-:note
+::note
 在 Nuxt 中，声明 Vue 组件推荐使用 `<script setup lang="ts">`。
-:
+::
 
 :read-more{to=/docs/getting-started/data-fetching}
 

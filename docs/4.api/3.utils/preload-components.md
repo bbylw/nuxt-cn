@@ -18,6 +18,6 @@ await preloadComponents('MyGlobalComponent')
 await preloadComponents(['MyGlobalComponent1', 'MyGlobalComponent2'])
 ```
 
-:note
+::note
 在服务端，`preloadComponents` 没有任何效果。
-:
+::

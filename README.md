@@ -86,6 +86,20 @@ useSeoMeta({
 
 我们强烈建议你查阅 [Nuxt 文档](https://nuxt.com/docs) 来提升技能。它是学习该框架的绝佳资源，内容涵盖从入门到高级主题的一切。
 
+本仓库是 Nuxt 官方文档的中文翻译站（[nuxt.ndjp.net](https://nuxt.ndjp.net)）：
+
+- `docs/` —— 与上游 [nuxt/nuxt](https://github.com/nuxt/nuxt/tree/main/docs) 保持同步的中文文档（CLI 命令部分同步自 [nuxt/cli](https://github.com/nuxt/cli/tree/main/docs)）
+- `site/` —— 基于 [Fumadocs](https://fumadocs.dev)（Next.js）的文档站，静态导出，支持中文全文搜索
+
+本地运行文档站：
+
+```bash
+cd site
+pnpm install
+pnpm dev      # 开发模式 http://localhost:3000
+pnpm build    # 静态导出到 site/out/
+```
+
 ## <a name="modules">🧩 模块</a>
 
 浏览我们的[模块列表](https://nuxt.com/modules)，由 Nuxt 团队与社区打造，为你的 Nuxt 项目注入超能力。

@@ -9,9 +9,9 @@ links:
     size: xs
 ---
 
-:important
+::important
 该组合式函数在 Nuxt v3.12+ 中可用。
-:
+::
 
 ## 描述
 
@@ -58,6 +58,6 @@ const { message, politeness, set, polite, assertive } = useRouteAnnouncer({
 </script>
 ```
 
-:callout
+::callout
 对于页内动态内容变化（表单校验、toast、加载状态）的播报，请改用 [`useAnnouncer`](/docs/api/composables/use-announcer)。
-:
+::

@@ -12,13 +12,13 @@ links:
 
 `navigateTo` 在服务端和客户端都可用。它可以在 [Nuxt 上下文](/docs/guide/going-further/nuxt-app#the-nuxt-context) 中使用，也可以直接使用，以执行页面导航。
 
-:warning
+::warning
 调用 `navigateTo` 时，务必对其结果使用 `await` 或 `return`。
-:
+::
 
-:note
+::note
 `navigateTo` 不能在 Nitro 路由中使用。要在 Nitro 路由中执行服务端重定向，请改用 [`sendRedirect`](https://h3.dev/utils/response#redirectlocation-status-statustext)。
-:
+::
 
 ### 在 Vue 组件中
 
@@ -40,6 +40,10 @@ await navigateTo({
 })
 </script>
 ```
+
+::note
+调用 `navigateTo` 不会停止你 `<script setup>` 中其余代码的执行。如果你希望一次成功的导航从 `setup()` 中提前返回，请启用 [`experimental.navigateToEarlyReturn`](/docs/guide/going-further/experimental-features#navigatetoearlyreturn)。
+::
 
 ### 在路由中间件中
 
@@ -120,7 +124,7 @@ await navigateTo('https://nuxt.com', {
 export function navigateTo (
   to: RouteLocationRaw | undefined | null,
   options?: NavigateToOptions,
-): Promise<void | NavigationFailure | false> | false | void | RouteLocationRaw
+): Promise<void | NavigationFailure | false> | false | void
 
 interface NavigateToOptions {
   replace?: boolean
@@ -150,7 +154,7 @@ type OpenWindowFeatures = {
 
 **类型**：[`RouteLocationRaw`](https://router.vuejs.org/api/interfaces/routelocationoptions) | `undefined` | `null`
 
-**默认值**：`'/`
+**默认值**：`'/'`
 
 `to` 可以是一个纯字符串，或要重定向到的路由对象。当传入 `undefined` 或 `null` 时，默认会指向 `'/'`。
 
@@ -200,7 +204,7 @@ await navigateTo({ name: 'product', params: { id: 1 } })
 - `open`
 
   - **类型**：`OpenOptions`
-  - 允许使用 window 的 [open()](https://developer.mozilla.org/en-US/docs/Web/API/Window/open) 方法导航到该 URL。此选项仅适用于客户端，在服务端会被忽略。
+  - 允许使用 window 的 [open()](https://developer.mozilla.org/en-US/docs/Web/API/Window/open) 方法导航到该 URL。它只在客户端受支持；在服务端，带 `open` 的 `navigateTo` 不做任何事情（no-op），不过 script 协议的 URL 仍然会被拒绝。
 
     一个接受以下属性的对象：
 
@@ -228,3 +232,16 @@ await navigateTo({ name: 'product', params: { id: 1 } })
       | `noreferrer`              | `boolean` | 阻止发送 Referer 请求头，并隐式启用 `noopener`。                                  |
 
       参见[文档](https://developer.mozilla.org/en-US/docs/Web/API/Window/open#windowfeatures)以获取关于 **windowFeatures** 属性的更详细信息。
+
+      ::note
+      `noopener` 默认启用，因此被打开的页面无法通过 `window.opener` 访问你的应用，除非你为那次调用或在整个应用范围内禁用它。在这种情况下，除 `_self`、`_parent` 和 `_top` 之外的具名 `target` 总会打开一个新窗口，而不是复用已有的窗口。对于需要 `window.opener` 的页面（例如把结果回传过来的 OAuth 弹窗），或者想要复用具名窗口时，请将其设为 `false`：
+
+      ```ts
+      await navigateTo('https://auth.example.com/authorize', {
+        external: true,
+        open: { target: '_blank', windowFeatures: { popup: true, noopener: false } },
+      })
+      ```
+
+      要更改整个应用的默认值，请设置 [`experimental.defaults.navigateTo.noopener`](/docs/guide/going-further/experimental-features#defaults)。
+      ::

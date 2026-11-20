@@ -10,7 +10,7 @@ description: 在开发容器中设置或打开 Nuxt 项目，以获得一致开�
 
 ::read-more{to="https://code.visualstudio.com/docs/devcontainers/containers" target="_blank"}
 阅读更多关于开发容器的内容
-:::
+::
 
 ### 前置条件
 
