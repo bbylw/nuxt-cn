@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Noto_Sans_SC, JetBrains_Mono } from 'next/font/google'
-import { RootProvider } from 'fumadocs-ui/provider'
+import { RootProvider } from 'fumadocs-ui/provider/next'
 import ZhSearchDialog from '@/components/search-dialog'
 import { ChunkErrorHandler } from '@/components/chunk-error-handler'
 import './globals.css'

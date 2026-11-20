@@ -12,7 +12,7 @@ import {
   SearchDialogOverlay,
 } from 'fumadocs-ui/components/dialog/search'
 import { createContentHighlighter, type ReactSortedResult } from 'fumadocs-core/search'
-import { create, load, search, type AnyOrama } from '@orama/orama'
+import { create, load, search, type AnyZBSearch } from 'zbsearch'
 import { createZhTokenizer } from '@/lib/tokenizer'
 
 const schema = {
@@ -24,10 +24,10 @@ const schema = {
   keywords: 'string',
 } as const
 
-// fumadocs-core 15.8.5 的 static 搜索把 {type, db} 包装对象直接传给 orama，
-// 导致 "Cannot read properties of undefined (reading 'index')"，这里自行实现静态搜索
-let dbPromise: Promise<AnyOrama> | null = null
-function loadDB(): Promise<AnyOrama> {
+// 搜索索引由 fumadocs-core 16 导出（zbsearch 格式），这里在浏览器端加载后自行检索，
+// 以便复用与服务端一致的 Intl.Segmenter 中文分词器
+let dbPromise: Promise<AnyZBSearch> | null = null
+function loadDB(): Promise<AnyZBSearch> {
   dbPromise ??= fetch('/api/search')
     .then((res) => {
       if (!res.ok) throw new Error(`failed to load search index: ${res.status}`)

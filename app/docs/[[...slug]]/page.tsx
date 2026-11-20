@@ -47,7 +47,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         repo: 'nuxt-cn',
         path: `docs/${page.data.filePath}`,
       }}
-      footer={
+      footer={{
+        // fumadocs 16 的 footer 是 props 对象，ReactNode 需放在 component 里
+        component: (
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
           {prev ? (
             <Link
@@ -78,7 +80,8 @@ export default async function Page({ params }: { params: Promise<Params> }) {
             <span className="flex-1" />
           )}
         </div>
-      }
+        ),
+      }}
     >
       <DocsTitle>{page.data.title}</DocsTitle>
       {page.data.description && <DocsDescription>{page.data.description}</DocsDescription>}

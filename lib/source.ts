@@ -45,7 +45,7 @@ const SECTIONS: Record<string, { title: string; icon?: string; defaultOpen?: boo
   'community': { title: '社区', icon: 'MessagesSquare' },
   'bridge': { title: '迁移到 Nuxt Bridge', icon: 'Ship' },
   'migration': { title: '迁移到 Nuxt 3', icon: 'CircleArrowUp' },
-  'errors': { title: '错误码', icon: 'TriangleAlert' },
+  'errors': { title: '错误码', icon: 'TriangleExclamationPoint' },
 }
 
 const ROOT_PAGES = [
