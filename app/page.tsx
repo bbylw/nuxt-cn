@@ -53,9 +53,6 @@ export default function HomePage() {
       </header>
 
       <section className="mx-auto flex w-full max-w-4xl flex-col items-center px-6 pb-16 pt-20 text-center">
-        <span className="mb-6 rounded-full border border-fd-border bg-fd-muted px-3 py-1 text-xs text-fd-muted-foreground">
-          跟随 Nuxt 4.x 官方文档同步更新
-        </span>
         <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
           直观的 Vue
           <span className="text-fd-primary"> 全栈框架</span>
