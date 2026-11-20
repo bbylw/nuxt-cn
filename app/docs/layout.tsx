@@ -12,7 +12,7 @@ const baseOptions: BaseLayoutProps = {
             fill="#00DC82"
           />
         </svg>
-        Nuxt 中文文档
+        Nuxt
       </span>
     ),
     url: '/',

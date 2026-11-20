@@ -31,7 +31,7 @@ export default function HomePage() {
               fill="#00DC82"
             />
           </svg>
-          Nuxt 中文文档
+          Nuxt
         </span>
         <nav className="flex items-center gap-4 text-sm text-fd-muted-foreground">
           <Link href="/docs/getting-started/introduction" className="transition-colors hover:text-fd-foreground">
@@ -95,7 +95,7 @@ export default function HomePage() {
       </section>
 
       <footer className="mt-auto border-t border-fd-border py-8 text-center text-sm text-fd-muted-foreground">
-        Nuxt 官方文档中文翻译 · 基于 Fumadocs 构建 · 译文与上游{' '}
+        基于 Fumadocs 构建 · 译文与上游{' '}
         <a href="https://github.com/nuxt/nuxt" target="_blank" rel="noreferrer" className="underline">
           nuxt/nuxt
         </a>{' '}
