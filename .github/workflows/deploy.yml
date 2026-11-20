@@ -34,6 +34,22 @@ jobs:
 
       - run: pnpm build
 
+      # 保留历史构建的静态资源，避免缓存的旧 HTML 引用已删除的 chunk 而报错
+      - uses: actions/cache@v4
+        with:
+          path: .asset-cache
+          key: next-static-${{ github.run_id }}
+          restore-keys: next-static-
+
+      - name: Merge previous static assets
+        run: |
+          if [ -d .asset-cache/_next/static ]; then
+            cp -rn .asset-cache/_next/static/. out/_next/static/
+          fi
+          mkdir -p .asset-cache/_next/static
+          cp -r out/_next/static/. .asset-cache/_next/static/
+          find .asset-cache -type f -mtime +30 -delete
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { RootProvider } from 'fumadocs-ui/provider'
 import ZhSearchDialog from '@/components/search-dialog'
+import { ChunkErrorHandler } from '@/components/chunk-error-handler'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="flex min-h-screen flex-col">
+        <ChunkErrorHandler />
         <RootProvider
           search={{ SearchDialog: ZhSearchDialog }}
           i18n={{
