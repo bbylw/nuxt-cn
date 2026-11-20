@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const LINES: { text: string; className: string; delay: number }[] = [
   { text: '$ npx nuxt dev', className: 'text-zinc-100', delay: 400 },
@@ -14,6 +14,7 @@ const LINES: { text: string; className: string; delay: number }[] = [
 ]
 
 export function DevTerminal() {
+  const ref = useRef<HTMLDivElement>(null)
   const [count, setCount] = useState(0)
 
   useEffect(() => {
@@ -23,25 +24,37 @@ export function DevTerminal() {
     }
     let timer: ReturnType<typeof setTimeout>
     let i = 0
+    let started = false
     const step = () => {
       i += 1
       setCount(i)
       if (i < LINES.length) {
         timer = setTimeout(step, LINES[i].delay)
-      } else {
-        timer = setTimeout(() => {
-          i = 0
-          setCount(0)
-          timer = setTimeout(step, 600)
-        }, 6000)
       }
     }
-    timer = setTimeout(step, 500)
-    return () => clearTimeout(timer)
+    // 进入视口才开始播放，且只播放一次：避免离屏定时器与持续性自动动画
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          started = true
+          timer = setTimeout(step, 500)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.3 },
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => {
+      observer.disconnect()
+      clearTimeout(timer)
+    }
   }, [])
 
   return (
-    <div className="overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 shadow-2xl shadow-emerald-500/10">
+    <div
+      ref={ref}
+      className="overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 shadow-2xl shadow-emerald-500/10"
+    >
       <div className="flex items-center gap-1.5 border-b border-zinc-800 px-4 py-3">
         <span className="size-3 rounded-full bg-red-500/80" />
         <span className="size-3 rounded-full bg-yellow-500/80" />
@@ -54,7 +67,9 @@ export function DevTerminal() {
             {line.text}
           </div>
         ))}
-        <span className="inline-block h-4 w-2 animate-pulse bg-emerald-400 align-middle" />
+        <span
+          className={`inline-block h-4 w-2 bg-emerald-400 align-middle ${count < LINES.length ? 'animate-pulse' : ''}`}
+        />
       </div>
     </div>
   )

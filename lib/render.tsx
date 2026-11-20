@@ -177,7 +177,7 @@ const components = {
       src = fs.existsSync(path.join(process.cwd(), 'public', src)) ? src : `https://nuxt.com${src}`
     }
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img {...props} src={src} loading="lazy" className="rounded-lg border border-fd-border" />
+    return <img {...props} src={src} loading="lazy" decoding="async" className="rounded-lg border border-fd-border" />
   },
   note: Note,
   tip: Tip,

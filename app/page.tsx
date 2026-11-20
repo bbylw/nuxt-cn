@@ -23,6 +23,7 @@ import { codeToHtml } from 'shiki'
 import { DevTerminal } from '@/components/landing/dev-terminal'
 import { CodeTabs, type CodeTab } from '@/components/landing/code-tabs'
 import { CopyCommand } from '@/components/landing/copy-command'
+import { ModuleMarquee } from '@/components/landing/module-marquee'
 
 function NuxtLogo({ className }: { className?: string }) {
   return (
@@ -203,27 +204,6 @@ const MODULES_ROW_2 = [
   '@nuxt/hints',
 ]
 
-function ModuleRow({ items, reverse }: { items: string[]; reverse?: boolean }) {
-  const doubled = [...items, ...items]
-  return (
-    <div className="marquee-mask overflow-hidden">
-      <div
-        className={`marquee flex w-max gap-3 ${reverse ? 'marquee-reverse' : ''}`}
-      >
-        {doubled.map((name, i) => (
-          <span
-            key={`${name}-${i}`}
-            className="inline-flex items-center gap-2 rounded-full border border-fd-border bg-fd-card px-4 py-2 font-mono text-sm text-fd-muted-foreground"
-          >
-            <span className="size-2 rounded-full bg-fd-primary" />
-            {name}
-          </span>
-        ))}
-      </div>
-    </div>
-  )
-}
-
 export default async function HomePage() {
   const [stats, ...highlighted] = await Promise.all([
     getStats(),
@@ -363,8 +343,8 @@ export default async function HomePage() {
       </section>
 
       {/* Features */}
-      <section className="border-t border-fd-border/60 bg-fd-muted/20">
-        <div className="mx-auto w-full max-w-6xl px-6 py-20 lg:py-28">
+      <section className="cv-auto border-t border-fd-border/60 bg-fd-muted/20">
+        <div className="reveal mx-auto w-full max-w-6xl px-6 py-20 lg:py-28">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">为生产环境而生的每一项能力</h2>
             <p className="mt-4 text-fd-muted-foreground">
@@ -387,8 +367,8 @@ export default async function HomePage() {
       </section>
 
       {/* Rendering modes */}
-      <section className="mx-auto w-full max-w-6xl px-6 py-20 lg:py-28">
-        <div className="mx-auto max-w-2xl text-center">
+      <section className="cv-auto mx-auto w-full max-w-6xl px-6 py-20 lg:py-28">
+        <div className="reveal mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             一个框架，<span className="text-fd-primary">四种渲染策略</span>
           </h2>
@@ -409,16 +389,15 @@ export default async function HomePage() {
       </section>
 
       {/* Modules */}
-      <section className="border-t border-fd-border/60 bg-fd-muted/20 py-20 lg:py-24">
-        <div className="mx-auto max-w-2xl px-6 text-center">
+      <section className="cv-auto border-t border-fd-border/60 bg-fd-muted/20 py-20 lg:py-24">
+        <div className="reveal mx-auto max-w-2xl px-6 text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">站在繁荣生态的肩膀上</h2>
           <p className="mt-4 text-fd-muted-foreground">
             数百个官方与社区模块，一行配置即可接入 UI、内容、认证、SEO、测试等能力。
           </p>
         </div>
-        <div className="mt-12 space-y-3">
-          <ModuleRow items={MODULES_ROW_1} />
-          <ModuleRow items={MODULES_ROW_2} reverse />
+        <div className="mt-12">
+          <ModuleMarquee rows={[MODULES_ROW_1, MODULES_ROW_2]} />
         </div>
         <div className="mt-10 text-center">
           <a
@@ -434,8 +413,8 @@ export default async function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="mx-auto w-full max-w-6xl px-6 py-20 lg:py-28">
-        <div className="relative overflow-hidden rounded-2xl border border-fd-primary/30 bg-gradient-to-br from-fd-primary/10 via-fd-card to-fd-card px-8 py-14 text-center">
+      <section className="cv-auto mx-auto w-full max-w-6xl px-6 py-20 lg:py-28">
+        <div className="reveal relative overflow-hidden rounded-2xl border border-fd-primary/30 bg-gradient-to-br from-fd-primary/10 via-fd-card to-fd-card px-8 py-14 text-center">
           <div
             className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[560px] -translate-x-1/2 rounded-full bg-fd-primary/20 blur-[100px]"
             aria-hidden
