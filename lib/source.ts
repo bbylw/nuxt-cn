@@ -6,7 +6,7 @@ import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons'
 import { icons } from 'lucide-react'
 import type * as PageTree from 'fumadocs-core/page-tree'
 
-const DOCS_DIR = path.resolve(process.cwd(), '../docs')
+const DOCS_DIR = path.resolve(process.cwd(), 'docs')
 
 export interface DocFrontmatter {
   title?: string

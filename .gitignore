@@ -1,6 +1,24 @@
+# Dependencies
 node_modules/
-.output/
-.nuxt/
-dist/
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Logs
+*.log
+
+# Misc
+.DS_Store
+.idea
+.fleet
+
+# Local env files
 .env
+.env.*
+!.env.example
 *.local
+
+# TypeScript
+*.tsbuildinfo

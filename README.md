@@ -89,15 +89,14 @@ useSeoMeta({
 本仓库是 Nuxt 官方文档的中文翻译站（[nuxt.ndjp.net](https://nuxt.ndjp.net)）：
 
 - `docs/` —— 与上游 [nuxt/nuxt](https://github.com/nuxt/nuxt/tree/main/docs) 保持同步的中文文档（CLI 命令部分同步自 [nuxt/cli](https://github.com/nuxt/cli/tree/main/docs)）
-- `site/` —— 基于 [Fumadocs](https://fumadocs.dev)（Next.js）的文档站，静态导出，支持中文全文搜索
+- 仓库根目录 —— 基于 [Fumadocs](https://fumadocs.dev)（Next.js）的文档站，静态导出，支持中文全文搜索
 
 本地运行文档站：
 
 ```bash
-cd site
 pnpm install
 pnpm dev      # 开发模式 http://localhost:3000
-pnpm build    # 静态导出到 site/out/
+pnpm build    # 静态导出到 out/
 ```
 
 ## <a name="modules">🧩 模块</a>
